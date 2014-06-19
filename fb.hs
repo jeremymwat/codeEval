@@ -6,11 +6,11 @@ import Data.List
 main = do
     args <- getArgs
     fiStr <- map (read (words readFile (Head args)) :: Int)
-    fibi :: Int-> Int-> Int -> String
-    fibi fn sn num 
+   fibi :: Int-> Int-> Int -> String
+   fibi fn sn num 
       | (mod (fn*sn) num) == 0  = "FB"
       | mod fn num        == 0  = "F"
       | mod sn num        == 0  = "B"
       | otherwise               = show num
-    chew x = case xs of [] -> []
+   chew x = case xs of [] -> []
                         i:j:k:_ -> print (map (fibi i j [1..k]))
