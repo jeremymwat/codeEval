@@ -2,7 +2,6 @@
 import System.Environment
 import Data.List
 
--- broken, need to research do I/O, fiStr line might be culprit
 
 fibi :: Int -> Int -> Int -> String
 
@@ -14,6 +13,8 @@ fibi fn sn num
 
 readInt :: [Char] -> Int
 readInt x = read x
+
+func lst = case lst of s:n:num:_ ->
 
 main = do
     args <- getArgs
