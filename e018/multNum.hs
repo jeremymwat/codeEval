@@ -7,7 +7,7 @@ readInt :: [Char] -> Int
 readInt x = read x
 
 biggest :: Int -> Int -> String
-biggest num tes = show $ head [x|x<-[num*1,num*2..],x > tes]
+biggest num tes = show $ head [x|x<-[num*1,num*2..],x >= tes]
 
 chew :: [[String]] -> String
 
