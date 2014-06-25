@@ -5,12 +5,12 @@ import System.Environment
 
 flipr :: [String] -> String
 
-flipr str = reverse (foldr (\x y -> x ++ " " ++ y) "" str)
+flipr str = foldr (\x y -> x ++ " " ++ y) "" (reverse str)
 
 chew :: [String] -> String
 
 chew [] = ""
-chew (hd:[]) = if flipr (words hd)
+chew (hd:[]) = flipr (words hd)
 chew (hd:tl) = (flipr (words hd)) ++ "\n" ++ (chew tl)
 
 
