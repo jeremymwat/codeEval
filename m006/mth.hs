@@ -19,10 +19,10 @@ mth x =
 
 
 
+
 main = do
     args <- getArgs
     fiStr <- readFile (head args)
-   -- putStrLn $ intersperse '\n' $ chew $ map splitOn " "$ splitOn "\n" fiStr
-    print $ map splitOn " " $ splitOn "\n" (' ':fiStr)
+    putStrLn $ unlines $ filter (\x -> x /= "") $ map mth $ map (splitOn " ") (lines fiStr)
 
 
