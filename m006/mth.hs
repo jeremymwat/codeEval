@@ -4,25 +4,25 @@ import Data.List.Split
 import System.Environment
 import Data.Char
 
-
-mth :: String -> String
-
-mth lst = 
-    let l = length lst in
-    let m = digitToInt $ last lst in
-    if m > l || l == 1 then "" else  [lst !! (l - (1 + (digitToInt $ last lst)))]
+readInt :: String -> Int
+readInt x = read x
 
 
-chew :: [String] -> String
-chew [] = "" 
-chew (lst:[]) = mth lst
-chew (lst:"":_) = mth lst
-chew ("":tl) = chew tl
-chew (lst:tl) = (mth lst)++"\n"++(chew tl)
+mth :: [String] -> String
+
+mth x = 
+    let l = (length x - 1) in
+    let lst = take l x in
+    let m = readInt $ last x in
+    if m > l || m < 0 then "" else if m == 0 then last x else lst !! (l - m)
+
+
 
 
 main = do
     args <- getArgs
     fiStr <- readFile (head args)
-    putStrLn $ chew $ map (filter (\x -> x /= ' '))$ splitOn "\n" fiStr
+   -- putStrLn $ intersperse '\n' $ chew $ map splitOn " "$ splitOn "\n" fiStr
+    print $ map splitOn " " $ splitOn "\n" (' ':fiStr)
+
 
