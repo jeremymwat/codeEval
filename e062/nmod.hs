@@ -4,15 +4,23 @@ import Data.List.Split
 import System.Environment
 import Data.Char
 
-readInt :: String -> Int
-readInt x = read x
+readr :: String -> Int 
+readr x = read x
 
-nmodm (n:m:_) = head [ n-m*x | x <- [1,2..], (n -(m*x))<m]
+dg :: Int -> Int -> Int
+dg x y = if (x - y) < 0 then y else dg (x-y) y
 
+
+nmodm :: [String] -> String
+nmodm (n:m:_) = 
+    let (i,j) = (readr n,readr m) in
+    show $ dg j i 
+   -- show $ i - ((*) j $ toInteger $  floor (i/j) )
 
 
 main = do
     args <- getArgs
     fiStr <- readFile (head args)
---    putStrLn $ unlines $  (lines fiStr)
+   -- putStrLn $ unlines $ map (nmodm . splitOn ",") $ (lines fiStr)
 
+    print $ map (\x -> nmodm $ splitOn "," x) (lines fiStr)
