@@ -7,9 +7,6 @@ import Data.Char
 readInt :: String -> Int
 readInt x = read x
 
-
-mth :: [String] -> String
-
 nmodm (n:m:_) = head [ n-m*x | x <- [1,2..], (n -(m*x))<m]
 
 
