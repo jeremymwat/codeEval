@@ -8,7 +8,7 @@ readr :: String -> Int
 readr x = read x
 
 dg :: Int -> Int -> Int
-dg x y = if (x - y) <= 0 then x else dg (x-y) y
+dg x y = if (x - y) < 0 then x else dg (x-y) y
 
 
 nmodm :: [String] -> String
