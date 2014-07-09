@@ -1,5 +1,3 @@
---fold remove
---foldr (\x y -> if (x `elem` "abc") then y else x:y) "" "Thabis sabecncteanbce"
 import Data.List
 import Data.Function
 import Data.List.Split
