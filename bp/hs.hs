@@ -1,12 +1,9 @@
 import System.Environment
-import System.Exit
 
-main = getArgs >>= parse >>= putStr . process
 
-parse [] = usage  >> exit
-parse [f] = readFile f
+main = do
+    args <- getArgs
+    fiStr <- readFile (head args)
+    putStrLn $ unlines $ process (lines fiStr)
 
-process = unlines . lines
 
-usage   = putStrLn "Usage: foo <file>"
-exit    = exitWith ExitSuccess
