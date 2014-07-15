@@ -1,4 +1,5 @@
 #!/bin/bash
+#lazy quick auto git script
 
 if  [ "$#" -ne 1 ] ;
 then 
