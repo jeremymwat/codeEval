@@ -4,12 +4,13 @@ import System.Environment
 import Data.List.Split
 -- naive fibonacci
 
-fib 0 = 0
-fib 1 = 1
-fib n = fib (n-2) + fib (n-1)
+readI :: String -> Int
+readI x = read x
 
+fibs = 0:1:(zipWith (+) fibs (tail fibs))
+fib x = fibs!!x
 
 main = do
     args <- getArgs
     fiStr <-  readFile (head args)
-    putStrLn  
+    putStrLn $ unlines $ map (\x -> show $ fib (readI x)) (lines fiStr)
