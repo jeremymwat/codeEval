@@ -1,0 +1,27 @@
+import System.Environment
+
+-- force read to Int
+readF :: String -> Int
+readF s = read s 
+
+-- take arg string, break in to lines, remove commas, read from string to int
+listerize :: String -> [Int]
+listerize lst = map (\x -> map rd $ splitOn "," x) (lines lst)
+
+main = do
+    args <- getArgs
+    fiStr <- readFile (head args)
+    putStrLn $ unlines $ listerize (lines fiStr)
+
+
+
+
+
+
+
+main = do
+    args <- getArgs
+    fiStr <- readFile (head args)
+    putStrLn $ unlines $ process (lines fiStr)
+
+
