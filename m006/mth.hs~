@@ -23,6 +23,6 @@ mth x =
 main = do
     args <- getArgs
     fiStr <- readFile (head args)
-    putStrLn $ unlines $ filter (\x -> x /= "") $ map mth $ words (lines fiStr)
+    putStrLn $ unlines $ filter (\x -> x /= "") $ map mth $ map (splitOn " ") (lines fiStr)
 
 
