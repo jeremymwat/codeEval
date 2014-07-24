@@ -12,4 +12,4 @@ lis lst = map (\x -> map rd $ splitOn "," x) (lines lst)
 main = do
     args <- getArgs
     fiStr <- readFile (head args)
-    putStrLn $ unlines $ process (lines fiStr)
+    putStrLn $ unlines $ process fiStr
