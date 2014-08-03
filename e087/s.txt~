@@ -1,0 +1,11 @@
+SetCol 1 1
+QueryCol 1
+QueryCol 2
+QueryCol 3
+SetCol 2 2
+SetCol 3 3
+QueryCol 1
+QueryCol 2
+QueryCol 3
+SetRow 1 2
+QueryCol 1

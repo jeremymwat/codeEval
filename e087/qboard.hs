@@ -4,37 +4,42 @@ import System.Environment
 rd :: String -> Int
 rd s = read s 
 
+matr :: [[Int]]
 matr = take 256 (repeat $ take 256 $ repeat 0)
 
-setValLst ind val lstr = hd++newVal++(tail tl)
+setValLst :: Int -> a -> [a] -> [a]
+setValLst ind val lstr = hd++[val]++(tail tl)
                            where (hd,tl) = splitAt ind lstr
 
-
+setOp :: [String] -> (String,Int,Int)
 setOp (x:y:z:[]) = (x,rd y,rd z)
 setOp (x:y:[]) = (x,rd y,-1)
 setOp _        = ("QueryCol",0,-1)
 
-setCol i v = setValLst i (take 256 (repeat v))
-setRow i v = map (setValLst i v) 
+setCol :: Int -> Int -> [[Int]] -> [[Int]]
+setCol i v matx = setValLst i (take 256 (repeat v)) matx
 
-queryCol i matr = sum (matr!!i) 
-queryRow i matr = foldr (\x y -> (x!!i) + y)
+setRow :: Int -> Int -> [[Int]] -> [[Int]]
+setRow i v matx = map (setValLst i v) matx
 
--- take arg string, break in to lines, remove commas, read from string to int
-lis :: String -> [Int]
-lis lst = map (\x -> map rd $ splitOn "," x) (lines lst)
+queryCol :: Int -> [[Int]] -> String
+queryCol i matx = show $ sum (matx!!i) 
+                 
+queryRow :: Int -> [[Int]] -> String                  
+queryRow i matx = show $ foldr (\x y -> (x!!i) + y) 0 matx
 
-
-process matr lst
+process :: [[Int]] -> [(String,Int,Int)] -> [String]
+process matx lst
     | lst == []           = []
-    | hd == "QueryCol"    = (queryCol i matr):(process matr tl)
-    | hd == "QueryRow"    = (queryRow i matr):(process matr tl)
-    | hd == "SetCol"      = process (setCol i v matr) tl
-    | hd == "SetRow"      = process (setRow i v matr) tl
-    | hd == _             = []
+    | hd == "QueryCol"    = (queryCol i matx):(process matx tl)
+    | hd == "QueryRow"    = (queryRow i matx):(process matx tl)
+    | hd == "SetCol"      = process (setCol i v matx) tl
+    | hd == "SetRow"      = process (setRow i v matx) tl
+    | otherwise           = []
         where (hd,i,v) = head lst
+              tl = tail lst
 
 main = do
     args <- getArgs
     fiStr <- readFile (head args)
-    putStrLn $ unlines $ process $ map (\x -> setOp (words x)) lines fiStr)
+    putStrLn $ unlines $ process matr $ map (\x -> setOp (words x)) $ lines fiStr
